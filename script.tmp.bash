@@ -34,7 +34,7 @@ To install dependencies:
   ${0##*/} --deps | sudo apt install -
   ${0##*/} --deps | pip install -r /dev/stdin
 
-Report bugs to: <your email or GitHub issues>
+Report bugs to: <https://github.com/vvhybe/dotfiles/issues>
 EOF
 }
 
