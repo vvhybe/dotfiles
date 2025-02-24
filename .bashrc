@@ -11,9 +11,6 @@ export TERMINAL=ghostty
 # STARSHIP for shell prompt customization
 eval "$(starship init bash)"
 
-# OH MY POSH
-eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/bubblesline.omp.json')"
-
 # Zoxide the smart `cd` command
 eval "$(zoxide init bash)"
 
