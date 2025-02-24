@@ -58,6 +58,9 @@ gaps inner 6
 gaps outer 3
 
 # Set a color scheme
+# bg: dark gray blue dimmed
+# fg: light gray blueish
+# accent: sky gray blue
 set $bg #2E3440
 set $fg #D8DEE9
 set $accent #81A1C1
@@ -171,7 +174,7 @@ font pango:CaskaydiaCove 14
     # Switch to workspace
     bindsym $mod+1 workspace $ws1
     bindsym $mod+2 workspace $ws2
-    bindsym $mod+3 workspace $ws3; exec $browser
+    bindsym $mod+3 exec [ "$(pgrep -x $browser)" ] || $browser &; workspace $ws3
     bindsym $mod+4 workspace $ws4
     bindsym $mod+5 workspace $ws5
     bindsym $mod+6 workspace $ws6

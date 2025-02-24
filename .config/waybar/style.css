@@ -6,7 +6,7 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: rgba(46, 52, 64, 0.9);
     border-bottom: 3px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
@@ -95,12 +95,10 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #mpd {
+    margin: 5px 0;
     padding: 0 10px;
     color: #ffffff;
-    /* background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); */
-    /* background: radial-gradient(circle, rgba(2,0,36,0.5004202364539565) 0%, rgba(9,9,121,0.5004202364539565) 35%, rgba(0,212,255,0.5032213569021359) 100%); */
-    background: radial-gradient(circle, rgba(2,0,36,0.5004202364539565) 66%, rgba(9,9,121,0.5004202364539565) 89%, rgba(0,212,255,0.5032213569021359) 100%);
-    /* filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);  */
+    background: #3f77d1;
 }
 
 #window,

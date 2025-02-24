@@ -8,8 +8,14 @@ export EDITOR=nvim
 # TERMINAL
 export TERMINAL=ghostty
 
+# STARSHIP for shell prompt customization
+eval "$(starship init bash)"
+
 # OH MY POSH
 eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/bubblesline.omp.json')"
+
+# Zoxide the smart `cd` command
+eval "$(zoxide init bash)"
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="$PATH:$HOME/.local/bin"
@@ -84,29 +90,10 @@ xterm* | rxvt*)
 *) ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
-  #alias dir='dir --color=auto'
-  #alias vdir='vdir --color=auto'
-
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-fi
 
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -133,10 +120,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Turso
-export PATH="$PATH:/home/whybe/.turso"
+export PATH="$PATH:$HOME/.turso"
 
 # pnpm
-export PNPM_HOME="/home/whybe/snap/code/176/.local/share/pnpm"
+export PNPM_HOME="$HOME/snap/code/176/.local/share/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
 *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -153,3 +140,9 @@ function y() {
   fi
   rm -f -- "$tmp"
 }
+
+# broot br support function
+source "$HOME/.config/broot/launcher/bash/br"
+
+# starship config
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
