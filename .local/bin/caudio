@@ -1,0 +1,172 @@
+#!/usr/bin/env bash
+#
+# caudio: Control audio volume and mute status with notifications.
+#
+# Author: @vvhybe
+# Maintainer: @vvhybe
+# License: GPL-3.0
+
+readonly VERSION="v1.0.0"
+
+# Dependencies
+# NOTE::
+# If you’re using `PipeWire` instead of `PulseAudio`,
+# you don’t need to install PulseAudio.
+# PipeWire is comes with `wpctl` out of the box.
+readonly DEPS=(
+  "pipewire"
+  "wpctl"     # PipeWire command-line control
+  "libnotify" # Send desktop notifications with notify-send.
+)
+
+# Icons (using Nerd Fonts or FontAwesome)
+ICON_VOLUME="󰕾"
+ICON_MUTED="󰝟"
+ICON_UP="󰝝"
+ICON_DOWN="󰝞"
+
+# Script Manual
+usage() {
+  cat <<EOF
+Usage: ${0##*/} [OPTION]...
+
+Control audio volume and mute status with notifications.
+
+Options:
+  -h, --help      Show this help message and exit.
+  -v, --version   Show the script version and exit.
+  --deps          List all dependencies for this script (pipe-friendly).
+
+Commands:
+  up              Increase volume by 5%.
+  down            Decrease volume by 5%.
+  mute            Toggle mute status.
+
+Examples:
+  ${0##*/} up
+  ${0##*/} down
+  ${0##*/} mute
+
+To install dependencies:
+  ${0##*/} --deps | sudo pacman -S -
+  ${0##*/} --deps | sudo apt install -
+  ${0##*/} --deps | pip install -r /dev/stdin
+
+Report bugs to: <https://github.com/vvhybe/dotfiles/issues>
+EOF
+}
+
+# Function to list dependencies (pipe-friendly)
+list_deps() {
+  if [[ ${#DEPS[@]} -eq 0 ]]; then
+    echo "This script has no dependencies."
+    return 0
+  fi
+
+  for dep in "${DEPS[@]}"; do
+    echo "$dep"
+  done
+}
+
+# Function to detect the running notification daemon
+detect_notification_daemon() {
+  if pgrep mako >/dev/null; then
+    echo "mako"
+  elif pgrep dunst >/dev/null; then
+    echo "dunst"
+  elif pgrep xfce4-notifyd >/dev/null; then
+    echo "xfce4-notifyd"
+  else
+    echo "none"
+  fi
+}
+
+# Function to show a notification with an icon
+notify_audio() {
+  local message="$1"
+  local icon="$2"
+  local daemon
+
+  daemon=$(detect_notification_daemon)
+  if [[ "$daemon" == "none" ]]; then
+    echo "Error: No notification daemon is running. Please install and start one (e.g., mako, dunst)."
+    exit 1
+  fi
+
+  notify-send -h string:x-canonical-private-synchronous:audio-control -t 1000 -i "$icon" "Audio" "$message"
+}
+
+# Function to get the current volume
+get_volume() {
+  wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}' | cut -d. -f1
+}
+
+# Function to check if audio is muted
+is_muted() {
+  wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q "MUTED"
+}
+
+# Function to toggle mute
+toggle_mute() {
+  wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+  if is_muted; then
+    notify_audio "Muted" "$ICON_MUTED"
+  else
+    notify_audio "Unmuted" "$ICON_VOLUME"
+  fi
+}
+
+# Function to increase volume
+increase_volume() {
+  wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+  notify_audio "Volume: $(get_volume)%" "$ICON_UP"
+}
+
+# Function to decrease volume
+decrease_volume() {
+  wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+  notify_audio "Volume: $(get_volume)%" "$ICON_DOWN"
+}
+
+# Parse command-line arguments
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
+  case "$1" in
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  -v | --version)
+    echo "${0##*/} $VERSION"
+    exit 0
+    ;;
+  --deps)
+    list_deps
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1"
+    usage
+    exit 1
+    ;;
+  esac
+  shift
+done
+if [[ "$1" == "--" ]]; then shift; fi
+
+# Handle command-line arguments
+case "$1" in
+up)
+  increase_volume
+  ;;
+down)
+  decrease_volume
+  ;;
+mute)
+  toggle_mute
+  ;;
+*)
+  echo "Error: Invalid argument."
+  usage
+  exit 1
+  ;;
+esac
