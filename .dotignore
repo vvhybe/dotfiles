@@ -1,0 +1,6 @@
+# Files to ignore during symlinking
+# Uses simple glob patterns (supports *, ?, [abc]).
+README.md
+LICENSE
+.dotignore
+deps/
