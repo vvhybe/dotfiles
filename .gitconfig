@@ -1,0 +1,7 @@
+[user]
+	name = whybe
+	email = vvhybe@hotmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true

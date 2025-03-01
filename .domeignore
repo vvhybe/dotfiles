@@ -1,4 +1,6 @@
 # Ignore Git files and dome config
 .git/
 .domeignore
-dome.yaml
+.gitignore
+LICENSE
+README.md
