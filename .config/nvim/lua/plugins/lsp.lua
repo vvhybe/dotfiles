@@ -1,21 +1,4 @@
 return {
-  -- LSP configuration
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = {
-  --     servers = {
-  --       pyright = {},
-  --       tsserver = {},
-  --     },
-  --     setup = {
-  --       tsserver = function(_, opts)
-  --         require("typescript").setup({ server = opts })
-  --         return true
-  --       end,
-  --     },
-  --   },
-  -- },
-
   -- Mason (LSP installer)
   {
     "williamboman/mason.nvim",

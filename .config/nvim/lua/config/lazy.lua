@@ -7,7 +7,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -15,7 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
-
 
 require("lazy").setup({
   spec = {
@@ -33,12 +32,13 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
+
   install = { colorscheme = { "github_dark_default", "tokyonight", "habamax" } },
 
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
-  },                -- automatically check for plugin updates
+  }, -- automatically check for plugin updates
   performance = {
     rtp = {
       -- disable some rtp plugins
@@ -56,18 +56,21 @@ require("lazy").setup({
   },
 })
 
-
 -- Put this at the top of 'init.lua'
-local path_package = vim.fn.stdpath('data') .. '/site'
-local mini_path = path_package .. '/pack/deps/start/mini.nvim'
+local path_package = vim.fn.stdpath("data") .. "/site"
+local mini_path = path_package .. "/pack/deps/start/mini.nvim"
 if not vim.loop.fs_stat(mini_path) then
   vim.cmd('echo "Installing `mini.nvim`" | redraw')
   local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
+    "git",
+    "clone",
+    "--filter=blob:none",
     -- Uncomment next line to use 'stable' branch
-    '--branch', 'stable',
-    'https://github.com/echasnovski/mini.nvim', mini_path
+    "--branch",
+    "stable",
+    "https://github.com/echasnovski/mini.nvim",
+    mini_path,
   }
   vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
+  vim.cmd("packadd mini.nvim | helptags ALL")
 end

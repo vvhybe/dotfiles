@@ -1,10 +1,8 @@
 return {
   "nvim-telescope/telescope.nvim",
-  keys = {
-    { "<leader>fp", "<cmd>Telescope find_files<cr>", desc = "Find Plugin File" },
-  },
   opts = {
     defaults = {
+      file_ignore_patterns = { ".git/", "node_modules/" },
       layout_strategy = "horizontal",
       layout_config = { prompt_position = "top" },
       sorting_strategy = "ascending",
