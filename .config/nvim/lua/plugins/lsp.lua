@@ -9,7 +9,7 @@ return {
         "shfmt",
         "flake8",
         "pyright",
-        "tsserver",
+        "ts_ls",
       },
     },
   },
