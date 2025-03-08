@@ -1,44 +1,23 @@
 return {
-  "vimwiki/vimwiki",
-  lazy = false,
+  "lervag/wiki.vim",
+  name = "wiki",
+  event = "BufEnter *.md",
+  lazy = true,
+  ft = { "wiki", "md", "markdown" },
   init = function()
-    vim.g.vimwiki_list = {
-      {
-        path = "~/wiki", -- Path to your wiki directory
-        syntax = "markdown",
-        ext = ".md",
-      },
-    }
-    vim.g.vimwiki_global_ext = 0 -- Disable Vimwiki for non-wiki files
+    -- Set wiki root directory
+    vim.g.wiki_root = "~/wiki"
+
+    -- Basic configuration
+    vim.g.wiki_filetypes = { "md" } -- Use markdown files
+    vim.g.wiki_link_target_type = "md"
+
+    -- Enable link creation and following
+    vim.g.wiki_mappings_use_defaults = 1
+    vim.g.wiki_map_create_page = 1
+
+    -- Link settings
+    vim.g.wiki_link_extension = ".md"
+    vim.g.wiki_link_target_type = "md"
   end,
-  name = "wiki", -- Name of the menu
-  -- icon = " ",
-  -- keys = {
-  --   {
-  --     "<leader>kw",
-  --     "<cmd>VimwikiIndex<CR>",
-  --     -- icon = "",
-  --     desc = "Open Wiki Index",
-  --   },
-  --   {
-  --     "<leader>kn",
-  --     ":VimwikiMakeDiaryNote<CR>",
-  --     -- icon = "",
-  --     desc = "Open Wiki Daily Notes",
-  --   },
-  --   {
-  --     "<leader>ks",
-  --     ":Telescope find_files cwd=~/wiki<CR>",
-  --     -- icon = "",
-  --     desc = "Search Wiki files with Telescope",
-  --   },
-  --   {
-  --     "<leader>mp",
-  --     ":Glow<CR>",
-  --     -- icon = "",
-  --     desc = "Toggle Markdown preview with glow",
-  --     noremap = true,
-  --     silent = true,
-  --   },
-  -- },
 }

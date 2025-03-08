@@ -40,10 +40,19 @@ keymap.set("n", "<leader>mp", ":Glow<CR>", {
 })
 
 --- WIKI
-keymap.set("n", "<leader>ki", "<cmd>VimwikiIndex<CR>", { desc = "Wiki Index" })
-keymap.set("n", "<leader>kt", "<cmd>VimwikiTabIndex<CR>", { desc = "Wiki Open in Tab" })
-keymap.set("n", "<leader>ks", "<cmd>VimwikiUISelect<CR>", { desc = "Wiki Selection" })
-keymap.set("n", "<leader>kd", "<cmd>VimwikiDiaryIndex<CR>", { desc = "Wiki Diary Index" })
-keymap.set("n", "<leader>kn", "<cmd>VimwikiMakeDiaryNote<CR>", { desc = "Wiki New Diary Note" })
-keymap.set("n", "<leader>kl", "<cmd>VimwikiGenerateLinks<CR>", { desc = "Wiki Generate Links" })
-keymap.set("n", "<leader>kh", "<cmd>Vimwiki2HTML<CR>", { desc = "Wiki Convert to HTML" })
+---
+keymap.set("n", "<leader>ki", "<cmd>WikiIndex<CR>", { desc = "Wiki Index" })
+
+keymap.set("n", "<leader>ksP", "<cmd>WikiPages<CR>", { desc = "Wiki Pages" })
+keymap.set("n", "<leader>ksp", "<cmd>WikiFzfPages<CR>", { desc = "Wiki Find Pages" })
+keymap.set("n", "<leader>ksT", "<cmd>WikiTags<CR>", { desc = "Wiki Tags" })
+keymap.set("n", "<leader>kst", "<cmd>WikiFzfTags<CR>", { desc = "Wiki Find Tags" })
+keymap.set("n", "<leader>ksc", "<cmd>WikiToc<CR>", { desc = "Wiki Table of Contents" })
+
+keymap.set("n", "<leader>kt", "<cmd>WikiTocGenerate<CR>", { desc = "Wiki Generate Table of Contents" })
+
+keymap.set("n", "<leader>kd", "<cmd>WikiJournal<CR>", { desc = "Wiki Diary" })
+keymap.set("n", "<leader>kn", "<cmd>WikiJournalNew<CR>", { desc = "Wiki New Diary" })
+
+keymap.set("n", "<leader>kl", "<cmd>WikiLinkIncomingToggle<CR>", { desc = "Wiki Display Incoming Links" })
+keymap.set("n", "<leader>ke", "<cmd>WikiExport<CR>", { desc = "Wiki Export" })
