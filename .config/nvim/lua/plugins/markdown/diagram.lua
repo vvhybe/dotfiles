@@ -4,10 +4,6 @@ return {
     "3rd/image.nvim",
   },
   opts = { -- you can just pass {}, defaults below
-    integrations = {
-      require("diagram.integrations.markdown"),
-      require("diagram.integrations.neorg"),
-    },
     renderer_options = {
       mermaid = {
         background = nil, -- nil | "transparent" | "white" | "#hex"

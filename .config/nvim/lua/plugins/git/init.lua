@@ -1,8 +1,7 @@
 return {
-  { import = "plugins.git.blame" },
-  { import = "plugins.git.diffview" },
-  { import = "plugins.git.fugitive" },
-  { import = "plugins.git.gitsigns" },
-  { import = "plugins.git.lazygit" },
+  require("plugins.git.blame"),
+  require("plugins.git.diffview"),
+  require("plugins.git.fugitive"),
+  require("plugins.git.gitsigns"),
+  require("plugins.git.lazygit"),
 }
-

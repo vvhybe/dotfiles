@@ -1,5 +1,5 @@
 return {
-  { import = "plugins.ui.mini-starter" },
-  { import = "plugins.ui.themes.nightfox" },
-  { import = "plugins.ui.lualine" },
+  require("plugins.ui.colorscheme"),
+  require("plugins.ui.noice"),
+  require("plugins.ui.snacks"),
 }

@@ -1,4 +1,4 @@
 return {
-  { import = "plugins.syntax.treesitter" },
-  { import = "plugins.syntax.markdown" },
+  require("plugins.syntax.lsp"),
+  require("plugins.syntax.markdown"),
 }

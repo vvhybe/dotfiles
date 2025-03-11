@@ -1,6 +1,6 @@
 return {
-  { import = "plugins.markdown.wiki" },
-  { import = "plugins.markdown.glow" },
-  -- { import = "plugins.markdown.image" },
-  -- { import = "plugins.markdown.diagram" },
+  require("plugins.markdown.wiki"),
+  require("plugins.markdown.glow"),
+  require("plugins.markdown.image"),
+  require("plugins.markdown.diagram"),
 }
